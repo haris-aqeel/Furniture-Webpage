@@ -16,6 +16,7 @@ cartBtn.addEventListener('click', function() {
 
 closeCartBtn.addEventListener('click', function() {
     ui.removeCart();
+
 })
 
 // Cart
@@ -50,21 +51,22 @@ class Products{
 
 // Product displaying Class
 
+
 class UI{
 
     displayCart() {
         document.querySelector('.cart-overlay').classList.add('transparentBcg');
-        document.querySelector('.cart').classList.add('showCart');
-        
+        document.querySelector('.cart').classList.add('showCart');        
         var printCart =     JSON.parse(localStorage.getItem('details'));
+        
         printCart.forEach(element => {
             if (element !==""){
             var html = '<div class="cart-item"> <img src="'+element.url+'"> <div> <h4>'+element.name+'</h4> <h5>'+element.price+'</h5> <span class="remove-item">Remove Item</span> </div><div> <i class="fas fa-chevron-up"></i> <p class="item-amount">1</p><i class="fas fa-chevron-down"></i> </div></div>'    
-            document.getElementById('after').insertAdjacentHTML('afterend', html);
+            document.getElementById('after').insertAdjacentHTML('afterbegin', html);
         }});
         
-        
     }
+    
 
     removeCart() {
         document.querySelector('.cart-overlay').classList.remove('transparentBcg');
@@ -75,12 +77,12 @@ class UI{
         totalItems = [''];
         cart = [''];
         localStorage.setItem('details', JSON.stringify(totalItems));
-        location.reload()
+        document.getElementById('after').remove();
     }
     
 }
 
-// Local Storage Class
+// ocal Storage Class
 
 class Storage{
     constructor(uniqueKey, name, price, imageUrl){
@@ -105,7 +107,9 @@ class Storage{
             this.storeData();
             count++;
             cartItems.textContent = count;
-        }          
+            
+        }
+          
     }
 
     storeData(){
@@ -127,9 +131,9 @@ class Storage{
 
 
 }
+const ui = new UI;
 
 const products = new Products();
-const ui = new UI;
 // Event Listener
 document.addEventListener('DOMContentLoaded', function(){
     var storedCart =     JSON.parse(localStorage.getItem('details'));
