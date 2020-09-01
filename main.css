@@ -177,6 +177,11 @@ body {
   z-index: 2;
   visibility: hidden;
 }
+
+.visible{
+  visibility: visible!important;
+}
+
 .cart {
   position: fixed;
   top: 0;
